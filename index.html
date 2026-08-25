@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Emily Ortiz | Political Science, UCLA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      /* from the beach photo: muted ocean blue, sandy cream, soft sage, warm off-white */
+      --ocean:    #7a9eb5;
+      --ocean-lt: #c2d5e0;
+      --ocean-dk: #4d7a96;
+      --sand:     #e8dfc8;
+      --sand-lt:  #f5f0e4;
+      --sand-dk:  #c9bc9c;
+      --sage:     #8fa891;
+      --sage-lt:  #d4e0d5;
+      --cream:    #faf7f1;
+      --ink:      #2e2c28;
+      --ink-mid:  #5a5750;
+      --ink-soft: #9a9790;
+      --ink-faint:#ccc9c0;
+      --serif:    'Cormorant Garamond', Georgia, serif;
+      --sans:     'Jost', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 15px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: var(--cream);
+      border-bottom: 1px solid var(--sand);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5vw;
+      height: 54px;
+    }
+    .nav-name {
+      font-family: var(--serif);
+      font-size: 19px;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--ocean-dk); }
+
+    main { padding-top: 54px; }
+
+    /* ── HERO ── */
+    #about {
+      max-width: 940px;
+      margin: 0 auto;
+      padding: 5rem 5vw 4rem;
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 3.5rem;
+      align-items: start;
+    }
+
+    .hero-eyebrow {
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ocean-dk);
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 28px;
+      height: 1px;
+      background: var(--ocean);
+    }
+
+    h1 {
+      font-family: var(--serif);
+      font-size: clamp(44px, 6vw, 68px);
+      font-weight: 300;
+      line-height: 1.05;
+      color: var(--ink);
+      margin-bottom: 1.75rem;
+    }
+    h1 em {
+      font-style: italic;
+      color: var(--ocean-dk);
+    }
+
+    .hero-bio {
+      font-family: var(--serif);
+      font-size: 17px;
+      line-height: 1.85;
+      color: var(--ink-mid);
+      margin-bottom: 2rem;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 2rem;
+    }
+    .tag {
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      background: var(--sand-lt);
+      color: var(--ink-mid);
+      border: 1px solid var(--sand);
+      border-radius: 20px;
+    }
+
+    .hero-meta-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px 1.5rem;
+    }
+    .meta-item {
+      font-size: 12px;
+      color: var(--ink-soft);
+      display: flex;
+      gap: 8px;
+    }
+    .meta-item strong {
+      font-weight: 500;
+      color: var(--ink-mid);
+      min-width: 58px;
+    }
+
+    /* photo */
+    .photo-col { position: relative; }
+    .photo-frame {
+      width: 100%;
+      aspect-ratio: 3/4;
+      border-radius: 2px;
+      overflow: hidden;
+      border: 1px solid var(--sand);
+      position: relative;
+    }
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+    .photo-caption {
+      margin-top: 10px;
+      text-align: center;
+      font-size: 11px;
+      font-style: italic;
+      font-family: var(--serif);
+      color: var(--ink-faint);
+    }
+
+    /* ── SHARED SECTION STYLES ── */
+    .content-section {
+      max-width: 940px;
+      margin: 0 auto;
+      padding: 4rem 5vw;
+      border-top: 1px solid var(--sand);
+    }
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      margin-bottom: 2.5rem;
+    }
+    h2 {
+      font-family: var(--serif);
+      font-size: 32px;
+      font-weight: 300;
+      color: var(--ink);
+      white-space: nowrap;
+    }
+    .section-rule {
+      flex: 1;
+      height: 1px;
+      background: var(--sand);
+    }
+
+    /* ── RESEARCH ── */
+    .pub-group { margin-bottom: 2rem; }
+    .pub-group:last-child { margin-bottom: 0; }
+
+    .status-pill {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 3px 12px;
+      background: var(--ocean-lt);
+      color: var(--ocean-dk);
+      border-radius: 20px;
+      margin-bottom: 1rem;
+    }
+    .status-pill.working {
+      background: var(--sage-lt);
+      color: #4a6b4d;
+    }
+    .status-pill.review {
+      background: var(--sand);
+      color: var(--ink-mid);
+    }
+
+    .pub {
+      padding: 1.1rem 0;
+      border-bottom: 1px solid var(--sand-lt);
+      display: grid;
+      grid-template-columns: 6px 1fr;
+      gap: 0 1.25rem;
+      align-items: start;
+    }
+    .pub:first-of-type { border-top: 1px solid var(--sand-lt); }
+    .pub-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--ocean);
+      margin-top: 8px;
+      flex-shrink: 0;
+    }
+    .pub-title {
+      font-family: var(--serif);
+      font-size: 15.5px;
+      font-weight: 400;
+      line-height: 1.5;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+    .pub-title a {
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px solid var(--ocean-lt);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .pub-title a:hover {
+      color: var(--ocean-dk);
+      border-color: var(--ocean);
+    }
+    .pub-authors {
+      font-size: 12.5px;
+      font-style: italic;
+      color: var(--ink-mid);
+      margin-bottom: 3px;
+      font-family: var(--serif);
+    }
+    .pub-venue {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      color: var(--ink-soft);
+    }
+
+    /* ── TEACHING ── */
+    .teach-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1rem;
+      padding: 0.9rem 0;
+      border-bottom: 1px solid var(--sand-lt);
+      align-items: baseline;
+    }
+    .teach-item:first-child { border-top: 1px solid var(--sand-lt); }
+    .teach-name {
+      font-size: 14px;
+      color: var(--ink);
+      margin-bottom: 2px;
+    }
+    .teach-sub {
+      font-size: 11.5px;
+      font-style: italic;
+      font-family: var(--serif);
+      color: var(--ink-soft);
+    }
+    .teach-term {
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      color: var(--ink-soft);
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    /* ── OTHER RELEVANT RESEARCH EXPERIENCE ── */
+    .other-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1rem;
+      padding: 0.9rem 0;
+      border-bottom: 1px solid var(--sand-lt);
+      align-items: baseline;
+    }
+    .other-item:first-child { border-top: 1px solid var(--sand-lt); }
+    .other-name {
+      font-size: 14px;
+      color: var(--ink);
+      margin-bottom: 2px;
+    }
+    .other-sub {
+      font-size: 11.5px;
+      font-style: italic;
+      font-family: var(--serif);
+      color: var(--ink-soft);
+    }
+    .other-term {
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      color: var(--ink-soft);
+      text-align: right;
+      white-space: nowrap;
+    }
+    
+    /* ── GRANTS ── */
+    .grants-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    .grant-card {
+      background: var(--sand-lt);
+      border: 1px solid var(--sand);
+      border-radius: 4px;
+      padding: 1.1rem 1.2rem;
+    }
+    .grant-name {
+      font-family: var(--serif);
+      font-size: 14px;
+      color: var(--ink);
+      line-height: 1.4;
+      margin-bottom: 4px;
+    }
+    .grant-org {
+      font-size: 11px;
+      color: var(--ink-soft);
+      margin-bottom: 8px;
+    }
+    .grant-amount {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--ocean-dk);
+    }
+
+    /* ── CONTACT ── */
+    #contact-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+    .contact-block h3 {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 300;
+      color: var(--ink);
+      margin-bottom: 1.25rem;
+    }
+    .contact-row {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 10px;
+      font-size: 13px;
+    }
+    .c-label {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      min-width: 60px;
+      padding-top: 2px;
+    }
+    .c-value { color: var(--ink); }
+    .c-value a { color: var(--ocean-dk); text-decoration: none; }
+
+    .cv-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 1rem;
+      padding: 11px 22px;
+      background: transparent;
+      border: 1px solid var(--ocean);
+      color: var(--ocean-dk);
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .cv-btn:hover { background: var(--ocean); color: #fff; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--sand);
+      padding: 1.75rem 5vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 100%;
+    }
+    .footer-text {
+      font-size: 11px;
+      color: var(--ink-faint);
+      letter-spacing: 0.05em;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-eyebrow { animation: fadeUp 0.55s ease 0.1s both; }
+    h1            { animation: fadeUp 0.6s  ease 0.2s both; }
+    .hero-bio     { animation: fadeUp 0.6s  ease 0.32s both; }
+    .hero-tags    { animation: fadeUp 0.6s  ease 0.42s both; }
+    .hero-meta-grid { animation: fadeUp 0.6s ease 0.5s both; }
+    .photo-col    { animation: fadeUp 0.7s  ease 0.18s both; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 680px) {
+      #about { grid-template-columns: 1fr; }
+      .photo-col { order: -1; max-width: 160px; }
+      .grants-grid { grid-template-columns: 1fr 1fr; }
+      #contact-section { grid-template-columns: 1fr; }
+      .hero-meta-grid { grid-template-columns: 1fr; }
+      .teach-item { grid-template-columns: 1fr; }
+      .teach-term { text-align: left; }
+    }
+    @media (max-width: 480px) {
+      .grants-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#about" class="nav-name">Emily Ortiz</a>
+    <ul class="nav-links">
+      <li><a href="#research">Research</a></li>
+      <li><a href="#teaching">Teaching</a></li>
+      <li><a href="#grants">Grants</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main>
+
+    <!-- HERO -->
+    <section id="about">
+      <div class="hero-left">
+        <div class="hero-eyebrow">PhD Candidate · UCLA Political Science</div>
+        <h1>Emily<br><em>Ortiz</em></h1>
+        <p class="hero-bio">
+          My dissertation evaluates the seeming puzzle of how Latino Republicans are able to maintain a strong sense of ethnic identity while supporting a party that has explicitly targeted their co-ethnics.</p>
+        <p class="hero-bio">  I argue that Latino Republicans use a psychological maintenance strategy where they rely on partisans cues for judging what "good" or legitimate Latino group membership entails. Latino Republicans remain embedded in their communities and proud of their heritage, but the radius of their group-based obligation shifts depending on their partisan lens. I term this process ethnic redefinition.</p> 
+        <p class="hero-bio"> I test this theory using panel survey data and an original vignette experiment. While I develop the argument in the context of Latino politics, the theory speaks to a broader dynamic in polarized democracies: partisanship increasingly structures not just political preferences, but the boundaries of social groups themselves by shifting who belongs, and who deserves solidarity.</p>
+        <p class="hero-bio" style="margin-top: 1rem;">
+          Outside of research you can usually find me working on a new crocheting project, experimenting with funky nail art, or finding a new craft to fixate on!
+        </p>
+        <div class="hero-tags">
+          <span class="tag">Race &amp; Ethnic Politics</span>
+          <span class="tag">American Politics</span>
+          <span class="tag">Latino Politics</span>
+          <span class="tag">Political Psychology</span>
+        </div>
+        <div class="hero-meta-grid">
+          <div class="meta-item"><strong>Advisor</strong> Efrén Pérez</div>
+          <div class="meta-item"><strong>Office</strong> Bunche Hall, UCLA</div>
+        </div>
+      </div>
+      <div class="photo-col">
+        <div class="photo-frame">
+          <img src="IMG_1377.JPG" style="filter: contrast(65%) brightness(90%);" alt="Soft contrast PNG" />
+        </div>
+        <p class="photo-caption">Emily Ortiz</p>
+      </div>
+    </section>
+
+    <!-- RESEARCH -->
+    <section id="research" class="content-section">
+      <div class="section-header">
+        <h2>Research</h2>
+        <div class="section-rule"></div>
+      </div>
+      <div class="pub-group">
+        <div class="status-pill">Peer-Reviewed Publications</div>
+        <div class="pub">
+           <div class="pub-dot"></div>
+          <div>
+            <p class="pub-title">Right-Wing Shift? Authoritarianism, Social Dominance, and System Justification Among People of Color Before and After 2024’s Election.</p>             
+              </a>
+            </p>
+            <p class="pub-authors">Ortiz, Emily, Ramona Alhambra, Andrew M. Engelhardt, and Efrén Pérez. </p>
+            <p class="pub-venue">Journal of Race, Ethnicity, and Politics· 2026. FirstView</p>
+            </div>
+        </div>
+           <div class="pub">
+           <div class="pub-dot"></div>
+          <div>
+        <p class="pub-title">Shared Discrimination’s Effect on Solidarity Between People of Color Is Uniform Across Major Racial, Political, and Social Differences.</p>              
+              </a>
+            </p>
+            <p class="pub-authors">Rogbeer, Kasheena G., Emily N. Ortiz, and Efrén Pérez. </p>
+            <p class="pub-venue">Journal of Experimental Politics · 2026. FirstView</p>
+          </div>
+        </div>
+           <div class="pub">
+           <div class="pub-dot"></div>
+          <div>
+            <p class="pub-title">
+              <a href="https://journals.sagepub.com/doi/full/10.1177/20531680251335651" target="_blank" rel="noopener">
+                New tree, growing forest: Updating meta-analytic evidence on solidarity between US people of color through an extension and partial replication
+              </a>
+            </p>
+            <p class="pub-authors">Alhambra, R., Ortiz, E., Pérez, E., Huynh, T., Bany-Mohammed, H., Rad, K., &amp; Crawford, N.</p>
+            <p class="pub-venue">Research &amp; Politics · 12(2) · 2025</p>
+          </div>
+        </div>
+        <div class="pub">
+          <div class="pub-dot"></div>
+          <div>
+            <p class="pub-title">
+              <a href="https://www.cambridge.org/core/journals/journal-of-race-ethnicity-and-politics/article/rage-against-the-machine-why-system-justification-drives-some-asian-americans-to-spurn-racial-solidarity/3D736D17C1880F5DDC815108AD17C8DD" target="_blank" rel="noopener">
+                Rage against the machine? Why system justification drives (some) Asian Americans to spurn racial solidarity
+              </a>
+            </p>
+            <p class="pub-authors">Pérez, E., Rogbeer, K., Tran, S., Huynh, T., Ortiz, E., Crossley, H., &amp; Passananti, M.</p>
+            <p class="pub-venue">Journal of Race, Ethnicity, and Politics · 2025 · pp. 1–22</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="pub-group">
+        <div class="status-pill review">Under Review</div>
+        <div class="pub">
+          <div class="pub-dot" style="background:var(--sand-dk)"></div>
+          <div>
+            <p class="pub-title">Benefit or Backlash? Examining the Consequences of Expanding Definitions of Prejudice</p>
+            <p class="pub-authors">With Josh Goetz, Ananya Hariharan, Connor Warshauer, Clayton Becker, and Grant Baldwin · UCLA Department of Political Science</p>
+            <p class="pub-venue">Manuscript under review</p>
+          </div>
+        </div>
+        <div class="pub">
+          <div class="pub-dot" style="background:var(--sand-dk)"></div>
+          <div>
+            <p class="pub-title">All Aboard? Solidarity Between People of Color and the Validated Votes of Black, Latino, and Asian Adults.</p>
+            <p class="pub-authors">With Efrén Pérez, Kasheena Rogbeer, and Andrew Engelhardt · UCLA Department of Political Science</p>
+            <p class="pub-venue">Manuscript under review</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="pub-group">
+        <div class="status-pill working">Working Papers</div>
+        <div class="pub">
+          <div class="pub-dot" style="background:var(--sage)"></div>
+          <div>
+            <p class="pub-title">Republican and Latino: How Partisanship Reshapes Ethnic Identity in a Polarizing Era</p>
+            <p class="pub-authors">Emily Ortiz. &amp; Efrén Pérez.</p>
+            <p class="pub-venue">Working paper</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TEACHING -->
+    <section id="teaching" class="content-section">
+      <div class="section-header">
+        <h2>Teaching</h2>
+        <div class="section-rule"></div>
+      </div>
+
+      <div class="teach-item">
+        <div>
+          <div class="teach-name">M181B · Latinx Politics</div>
+          <div class="teach-sub">Teaching Assistant · Drs. Izul de la Vega &amp; Matt Barreto</div>
+        </div>
+        <div class="teach-term">Fall 2023 · Winter 2024 · Fall 2024</div>
+      </div>
+      <div class="teach-item">
+        <div>
+          <div class="teach-name">M183 / M36C · Experiments in Race &amp; Ethnic Politics</div>
+          <div class="teach-sub">Teaching Assistant · Cross-listed Political Science &amp; Psychology · Dr. Efrén Pérez</div>
+        </div>
+        <div class="teach-term">Spring 2024 · Spring 2026</div>
+      </div>
+      <div class="teach-item">
+        <div>
+          <div class="teach-name">M141A · Political Psychology</div>
+          <div class="teach-sub">Teaching Assistant · Cross-listed Political Science &amp; Psychology · Dr. Efrén Pérez</div>
+        </div>
+        <div class="teach-term">Spring 2025</div>
+      </div>
+      <div class="teach-item">
+        <div>
+          <div class="teach-name">PS40 · Introduction to American Politics</div>
+          <div class="teach-sub">Teaching Assistant · Dr. Julia Payson</div>
+        </div>
+        <div class="teach-term">Fall 2025</div>
+      </div>
+      <div class="teach-item">
+        <div>
+          <div class="teach-name">PS10 · Introduction to Political Theory</div>
+          <div class="teach-sub">Teaching Assistant · Dr. John Branstetter</div>
+        </div>
+        <div class="teach-term">Winter 2026</div>
+      </div>
+      <div class="teach-item">
+        <div>
+          <div class="teach-name">Cluster Program GE60 · America in Sixties: Politics, Society, and Culture, 1954 to 1974</div>
+          <div class="teach-sub">Teaching Assistant</div>
+        </div>
+        <div class="teach-term">Fall 2026, Winter 2027</div>
+      </div>
+      <div class="teach-item">
+        <div>
+          <div class="teach-name">Summer Institute PS40 · Introduction to American Politics</div>
+          <div class="teach-sub">Instructor of Record</div>
+        </div>
+        <div class="teach-term">Summer 2026</div>
+      </div>
+    </section>
+
+    <!-- GRANTS -->
+    <section id="grants" class="content-section">
+      <div class="section-header">
+        <h2>Grants &amp; Fellowships</h2>
+        <div class="section-rule"></div>
+      </div>
+      <div class="grants-grid">
+        <div class="grant-card">
+          <p class="grant-name">Eugene V. Cota-Robles Fellowship</p>
+          <p class="grant-org">UCLA · 2022–2023, reinstated at candidacy</p>
+          <p class="grant-amount">$30,000 + fees</p>
+        </div>
+        <div class="grant-card">
+          <p class="grant-name">Initiative to Study Hate (ISH) Grant</p>
+          <p class="grant-org">UCLA · Joint grant · July 2024</p>
+          <p class="grant-amount">$25,000</p>
+        </div>
+        <div class="grant-card">
+          <p class="grant-name">Summer Mentored Research Fellowship</p>
+          <p class="grant-org">UCLA · Summer 2024</p>
+          <p class="grant-amount">$6,000</p>
+        </div>
+        <div class="grant-card">
+          <p class="grant-name">Luskin Center for History &amp; Policy Grant</p>
+          <p class="grant-org">UCLA · Joint grant · Fall 2024</p>
+          <p class="grant-amount">$3,000</p>
+        </div>
+        <div class="grant-card">
+          <p class="grant-name">Alan D. Leve Research &amp; Travel Grant</p>
+          <p class="grant-org">UCLA · Spring 2025</p>
+          <p class="grant-amount">$3,000</p>
+        </div>
+        <div class="grant-card">
+          <p class="grant-name">Political Psychology Fellowship</p>
+          <p class="grant-org">Spring 2026</p>
+          <p class="grant-amount">$2,000</p>
+        </div>
+      </div>
+    </section>
+
+     <!-- OTHER RELEVANT RESEARCH EXPERIENCE -->
+<section id="other" class="content-section">
+      <div class="section-header">
+        <h2>Other Relevant Research Experience</h2>
+        <div class="section-rule"></div>
+      </div>
+      <div class="other-item">
+        <div>
+          <div class="other-name">Race, Ethnicity, Politics, and Society (REPS) Lab Manager</div>
+          <div class="other-sub">UCLA under Dr. Efren Perez</div>
+        </div>
+        <div class="other-term">Fall 2024 - current</div>
+     <div>
+          <div class="other-name">Research Assistant on Collaborative Multiracial Post-Election Survey (CMPS)</div>
+          <div class="other-sub">UCLA under Dr. Lorrie Frasure and Dr. Natalie Masuoka</div>
+        </div>
+        <div class="other-term">Fall 2024 - Fall 2025</div>
+      </div>
+    </section>
+  
+    <!-- CONTACT -->
+    <section id="contact" class="content-section">
+      <div class="section-header">
+        <h2>Contact</h2>
+        <div class="section-rule"></div>
+      </div>
+      <div id="contact-section">
+        <div class="contact-block">
+          <h3>Get in touch</h3>
+          <div class="contact-row">
+            <span class="c-label">Email</span>
+            <span class="c-value"><a href="mailto:enortiz@ucla.edu">enortiz@ucla.edu</a></span>
+          </div>
+          <div class="contact-row">
+            <span class="c-label">Office</span>
+            <span class="c-value">Bunche Hall<br>UCLA, Los Angeles CA 90095</span>
+          </div>
+          <div class="contact-row">
+            <span class="c-label">Department</span>
+            <span class="c-value">Political Science, UCLA</span>
+          </div>
+        </div>
+        <div class="contact-block">
+          <h3>Curriculum Vitae</h3>
+          <p style="font-size:13px;color:var(--ink-soft);line-height:1.75;margin-bottom:0.75rem;">
+            Download a full copy of my CV including publications, teaching, grants, and technical skills.
+          </p>
+          <!-- Replace href="#" with the path to your PDF, e.g. href="Ortiz_Emily_CV.pdf" -->
+          <a href="Ortiz_Emily_CV_Aug2026.pdf"
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+              <path d="M6.5 1v7.5M4 6l2.5 2.5L9 6M1.5 11h10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Download CV (PDF)
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <span class="footer-text">Emily Ortiz · UCLA Department of Political Science</span>
+    <span class="footer-text">enortiz@ucla.edu</span>
+  </footer>
+
+</body>
+</html>
